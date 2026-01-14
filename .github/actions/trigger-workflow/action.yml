@@ -62,7 +62,7 @@ runs:
         debug "Parsed Event Type: ${EVENT_TYPE}"
         
         # Validate and set payload (default to empty object if not provided)
-        PAYLOAD_INPUT="${{ inputs.payload }}"
+        PAYLOAD_INPUT='${{ inputs.payload }}'
         if [ -z "$PAYLOAD_INPUT" ]; then
           PAYLOAD_INPUT="{}"
           debug "Payload input was empty, using default: {}"
