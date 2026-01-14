@@ -23,6 +23,7 @@ jobs:
     name: 'Trigger Workflow in Another Repository'
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: 'Trigger workflow in target repository'
         uses: ./.github/actions/trigger-workflow
         with:
