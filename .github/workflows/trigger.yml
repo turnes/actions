@@ -1,0 +1,32 @@
+name: 'Trigger Workflow Example'
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_repo:
+        description: 'Target repository (owner/repo)'
+        required: true
+        type: string
+      event_type:
+        description: 'Event type to trigger'
+        required: true
+        type: string
+        default: 'hello-world'
+      payload:
+        description: 'Payload JSON (optional)'
+        required: false
+        type: string
+        default: '{"message": "Hello from trigger workflow!"}'
+
+jobs:
+  trigger:
+    name: 'Trigger Workflow in Another Repository'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Trigger workflow in target repository'
+        uses: ./.github/actions/trigger-workflow
+        with:
+          repo: ${{ inputs.target_repo }}
+          event_type: ${{ inputs.event_type }}
+          payload: ${{ inputs.payload }}
+          PAT: ${{ secrets.PAT }}
